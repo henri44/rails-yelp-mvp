@@ -1,0 +1,35 @@
+
+<div class="container">
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <div class="text-center padded card">
+            <h1><%= @restaurant.name %></h1>
+              <p><%= @restaurant.address %></p>
+              <p><%= @restaurant.phone_number %></p>
+              <p><%= @restaurant.category %></p>
+              <ul>
+                <% @restaurant.reviews.each do |review| %>
+                  <p><%= review.content %>, <%= review.rating %>/5</p>
+                <% end %>
+              </ul>
+
+            <!-- <em><%= link_to "Add a review", new_restaurant_review_path(@restaurant) %></em> -->
+
+            <button data-toggle="modal" data-target="#form-review">Add a review</button>
+            </br>
+               <%= link_to "Back to home", restaurants_path %>
+          </div>
+        </div>
+
+      </div>
+</div>
+
+
+<div class="modal fade wrapper" id="form-review">
+<%= simple_form_for([@restaurant, @review]) do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.button :submit %>
+<% end %>
+</div>
